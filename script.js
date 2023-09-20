@@ -1,16 +1,43 @@
-const html = document.querySelector('html'); // referenciat tag html
-const focoBt = document.querySelector('.app__card-button--foco');
+const html = document.querySelector('html'); // referencia tag html
+const focoBt = document.querySelector('.app__card-button--foco'); // referencia tag button pelo nome da classe
 const curtoBt = document.querySelector('.app__card-button--curto');
 const longoBt = document.querySelector('.app__card-button--longo');
+const banner = document.querySelector('.app__image'); // referencia tag img pela classe
+const titulo = document.querySelector('.app__title') // referencia da tag h1 pelo nome da classe
 
 focoBt.addEventListener('click', () => { // passando uma função para quando ocorrer um click no botão
-    html.setAttribute('data-contexto', 'foco')
+    alterarContexto('foco')
 })
 
 curtoBt.addEventListener('click', () => { 
-    html.setAttribute('data-contexto', 'descanso-curto') // mudando o valor do data contexto para descanso curto -> está no css
+    alterarContexto('descanso-curto')
 })
 
 longoBt.addEventListener('click', () => { 
-    html.setAttribute('data-contexto', 'descanso-longo')
+    alterarContexto('descanso-longo')
 })
+
+function alterarContexto(contexto) {
+    html.setAttribute('data-contexto', contexto); // mudando o valor do data contexto, cor de fundo -> está no css
+    banner.setAttribute('src', `/imagens/${contexto}.png`); // template string, inserindo junto de um elemento html, alterando a imagem
+    switch (contexto) {
+        case "foco":
+            titulo.innerHTML = `
+            Otimize sua produtividade,<br>
+                <strong class="app__title-strong">mergulhe no que importa.</strong>
+            `
+            break;
+        case "descanso-curto":    
+            titulo.innerHTML = `
+            Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta.</strong>
+            `
+            break;
+
+        case "descanso-longo":    
+            titulo.innerHTML = `
+            Hora de voltar a superfície <strong class="app__title-strong">Faça uma pausa longa.</strong>
+            `    
+        default:
+            break;
+    }
+}
