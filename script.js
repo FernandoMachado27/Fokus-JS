@@ -4,23 +4,30 @@ const curtoBt = document.querySelector('.app__card-button--curto');
 const longoBt = document.querySelector('.app__card-button--longo');
 const banner = document.querySelector('.app__image'); // referencia tag img pela classe
 const titulo = document.querySelector('.app__title') // referencia da tag h1 pelo nome da classe
+const botoes = document.querySelectorAll('.app__card-button')
 
 focoBt.addEventListener('click', () => { // passando uma função para quando ocorrer um click no botão
-    alterarContexto('foco')
+    alterarContexto('foco');
+    focoBt.classList.add('active');
 })
 
 curtoBt.addEventListener('click', () => { 
-    alterarContexto('descanso-curto')
+    alterarContexto('descanso-curto');
+    curtoBt.classList.add('active');
 })
 
 longoBt.addEventListener('click', () => { 
-    alterarContexto('descanso-longo')
+    alterarContexto('descanso-longo');
+    longoBt.classList.add('active');
 })
 
 function alterarContexto(contexto) {
+    botoes.forEach(function (contexto){
+        contexto.classList.remove('active'); // remove classe
+    })
     html.setAttribute('data-contexto', contexto); // mudando o valor do data contexto, cor de fundo -> está no css
     banner.setAttribute('src', `/imagens/${contexto}.png`); // template string, inserindo junto de um elemento html, alterando a imagem
-    switch (contexto) {
+    switch (contexto) { // para mudar o título da página
         case "foco":
             titulo.innerHTML = `
             Otimize sua produtividade,<br>
