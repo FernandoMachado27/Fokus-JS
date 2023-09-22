@@ -67,13 +67,28 @@ function alterarContexto(contexto) {
 }
 
 const contagemRegressiva = () => { // função contagem
-    //iniciar();
+    if(tempoDecorridoEmSegundos <= 0){
+        zerar();
+        alert('Tempo finalizado');
+        return;
+    }
+
     tempoDecorridoEmSegundos -= 1;
     console.log('Temporizador: ' + tempoDecorridoEmSegundos);
 }
 
-startPauseBt.addEventListener('click', contagemRegressiva); // quandop tiver o evento de click chame a função contagem regressiva
+startPauseBt.addEventListener('click', iniciarOuPausar); // quando tiver o evento de click chame a função contagem regressiva
 
-function iniciar() {
+function iniciarOuPausar() {
+    if(intervaloId){
+        zerar();
+        return;
+    }
+
     intervaloId = setInterval(contagemRegressiva, 1000); // executa o metodo dentro deste periodo de tempo
+}
+
+function zerar() {
+    clearInterval(intervaloId);
+    intervaloId = null;
 }
