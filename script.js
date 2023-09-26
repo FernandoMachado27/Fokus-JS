@@ -7,7 +7,8 @@ const titulo = document.querySelector('.app__title'); // referencia da tag h1 pe
 const botoes = document.querySelectorAll('.app__card-button');
 const startPauseBt = document.querySelector('#start-pause'); //buscando por id
 const iniciarOuPausarBt = document.querySelector('#start-pause span') // botão começar span
-const alterarIconePlay = document.querySelector('.app__card-primary-butto-icon')
+const alterarIconePlay = document.querySelector('.app__card-primary-butto-icon');
+const tempoNaTela = document.querySelector('#timer');
 
 const musicaFocoinput = document.querySelector('#alternar-musica');
 const musica = new Audio('/sons/luna-rise-part-one.mp3');
@@ -15,7 +16,7 @@ const tempFinalizado = new Audio('/sons/beep.mp3');
 const tempInicio = new Audio('/sons/play.wav');
 const tempPause = new Audio('/sons/pause.mp3');
 
-let tempoDecorridoEmSegundos = 5;
+let tempoDecorridoEmSegundos = 1500;
 let intervaloId = null;
 
 musica.loop = true;
@@ -80,7 +81,7 @@ const contagemRegressiva = () => { // função contagem
     }
 
     tempoDecorridoEmSegundos -= 1;
-    console.log('Temporizador: ' + tempoDecorridoEmSegundos);
+    mostrarTempo();
 }
 
 startPauseBt.addEventListener('click', iniciarOuPausar); // quando tiver o evento de click chame a função contagem regressiva
@@ -103,3 +104,10 @@ function zerar() {
     alterarIconePlay.setAttribute('src', `/imagens/play_arrow.png`)
     intervaloId = null;
 }
+
+function mostrarTempo() {
+    const tempo = tempoDecorridoEmSegundos;
+    tempoNaTela.innerHTML = `${tempo}`; // template string
+}
+
+mostrarTempo();
