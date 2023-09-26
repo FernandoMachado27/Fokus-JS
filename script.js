@@ -7,6 +7,7 @@ const titulo = document.querySelector('.app__title'); // referencia da tag h1 pe
 const botoes = document.querySelectorAll('.app__card-button');
 const startPauseBt = document.querySelector('#start-pause'); //buscando por id
 const iniciarOuPausarBt = document.querySelector('#start-pause span') // botão começar span
+const alterarIconePlay = document.querySelector('.app__card-primary-butto-icon')
 
 const musicaFocoinput = document.querySelector('#alternar-musica');
 const musica = new Audio('/sons/luna-rise-part-one.mp3');
@@ -93,10 +94,12 @@ function iniciarOuPausar() {
     tempInicio.play();
     intervaloId = setInterval(contagemRegressiva, 1000); // executa o metodo dentro deste periodo de tempo
     iniciarOuPausarBt.textContent = "Pausar";
+    alterarIconePlay.setAttribute('src', `/imagens/pause.png`)
 }
 
 function zerar() {
     clearInterval(intervaloId);
     iniciarOuPausarBt.textContent = "Começar";
+    alterarIconePlay.setAttribute('src', `/imagens/play_arrow.png`)
     intervaloId = null;
 }
