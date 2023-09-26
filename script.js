@@ -9,6 +9,9 @@ const startPauseBt = document.querySelector('#start-pause'); //buscando por id
 
 const musicaFocoinput = document.querySelector('#alternar-musica');
 const musica = new Audio('/sons/luna-rise-part-one.mp3');
+const tempZero = new Audio('/sons/beep.mp3');
+const tempInicio = new Audio('/sons/play.wav');
+const tempPause = new Audio('/sons/pause.mp3');
 
 let tempoDecorridoEmSegundos = 5;
 let intervaloId = null;
@@ -68,6 +71,7 @@ function alterarContexto(contexto) {
 
 const contagemRegressiva = () => { // função contagem
     if(tempoDecorridoEmSegundos <= 0){
+        tempZero.play();
         zerar();
         alert('Tempo finalizado');
         return;
@@ -81,10 +85,11 @@ startPauseBt.addEventListener('click', iniciarOuPausar); // quando tiver o event
 
 function iniciarOuPausar() {
     if(intervaloId){
+        tempPause.play();
         zerar();
         return;
     }
-
+    tempInicio.play();
     intervaloId = setInterval(contagemRegressiva, 1000); // executa o metodo dentro deste periodo de tempo
 }
 
